@@ -110,47 +110,38 @@ l'effettivo comportamento dell'applicazione) da quelli non funzionali
 (requisiti che non riguardano direttamente aspetti comportamentali, come
 sicurezza, performance, eccetera).
 
-### Elementi positivi {#elementi-positivi .unnumbered}
+### Elementi positivi
 
 -   Si fornisce una descrizione in linguaggio naturale di ciò che il
     software dovrà fare.
-
 -   Gli obiettivi sono spiegati con chiarezza, per punti.
-
--   Se il software è stato commissionato o è destinato ad un utente o
-    compagnia specifici, il committente viene nominato.
-
 -   Se vi sono termini il cui significato non è immediatamente
     intuibile, essi vengono spiegati.
-
 -   Vengono descritti separatamente requisiti funzionali e non
     funzionali.
-
 -   Considerato a un paio di pagine un limite ragionevole alla lunghezza
     della parte sui requisiti, in quello spazio si deve cercare di
     chiarire *tutti* gli aspetti dell'applicazione, non lasciando
     decisioni che impattano la parte "esterna" alla discussione del
     design (che dovrebbe solo occuparsi della parte "interna").
 
-### Elementi negativi {#elementi-negativi .unnumbered}
+### Elementi negativi
 
 -   Si forniscono indicazioni circa le soluzioni che si vogliono
     adottare.
-
 -   Si forniscono dettagli di tipo tecnico o implementativo (parlando di
     classi, linguaggi di programmazione, librerie, eccetera).
 
-### Esempio {#esempio .unnumbered}
+### Esempio
 
-Il software, commissionato dal gestore del centro di ricerca "Aperture
-Laboratories Inc."[^3], mira alla costruzione di una intelligenza
+Il software, commissionato dal gestore del centro di ricerca [Aperture
+Laboratories Inc.](https://theportalwiki.com/wiki/Aperture_Science), mira alla costruzione di una intelligenza
 artificiale di nome GLaDOS (Genetic Lifeform and Disk Operating System).
 Per intelligenza artificiale si intende un software in grado di assumere
 decisioni complesse in maniera semi autonoma sugli argomenti di sua
 competenza, a partire dai vincoli e dagli obiettivi datigli dall'utente.
 
 #### Requisiti funzionali
-
 -   La suddetta intelligenza artificiale dovrà occuparsi di coordinare
     le attività all'interno delle camere di test di Aperture, guidando
     l'utente attraverso un certo numero di sfide di difficoltà
@@ -163,13 +154,10 @@ competenza, a partire dai vincoli e dagli obiettivi datigli dall'utente.
     manipolazione di oggetti, pressione di pulsanti, azionamento di
     leve), e si ritengono conclusi una volta che il soggetto riesce a
     trovare l'uscita dalla camera di test.
-
 -   Il piano preciso ed il numero delle sfide sarà variabile, e GLaDOS
     dovrà essere in grado di adattarsi dinamicamente e di fornire
     indicazioni di guida.
-
 -   La personalità di GLaDOS dovrà essere modificabile.
-
 -   GLaDOS dovrà essere in grado di comunicare col reparto cucina di
     Aperture, per ordinare torte da donare agli utenti che completassero
     l'ultima camera di test con successo.
@@ -178,7 +166,7 @@ competenza, a partire dai vincoli e dagli obiettivi datigli dall'utente.
 
 -   GLaDOS dovrà essere estremamente efficiente nell'uso delle risorse.
     Le specifiche tecniche parlano della possibilità di funzionare su
-    dispositivi alimentati da una batteria a patata.
+    dispositivi alimentati da una [batteria a patata](https://www.youtube.com/watch?v=0lBKEOXMBcU).
 
 ## Analisi e modello del dominio
 
@@ -204,36 +192,30 @@ descrivere a parole il dominio, quindi estrarre i sostantivi utilizzati,
 capire il loro ruolo all'interno del problema, le relazioni che
 intercorrono fra loro, e reificarli in interfacce.
 
-### Elementi positivi {#elementi-positivi-1 .unnumbered}
+### Elementi positivi
 
 -   Viene descritto accuratamente il modello del dominio.
-
 -   Alcuni problemi, se non risolubili in assoluto o nel monte ore,
     vengono dichiarati come problemi che non saranno risolti o sarano
     risolti in futuro.
-
 -   Si modella il dominio in forma di UML, descrivendolo
     appropriatamente.
 
-### Elementi negativi {#elementi-negativi-1 .unnumbered}
+### Elementi negativi
 
 -   Manca una descrizione a parole del modello del dominio.
-
 -   Manca una descrizione UML delle entità del dominio e delle relazioni
     che intercorrono fra loro.
-
 -   Vengono elencate soluzioni ai problemi, invece della descrizione
     degli stessi.
-
 -   Vengono presentati elementi di design, o peggio aspetti
     implementativi.
-
 -   Viene mostrato uno schema UML che include elementi implementativi o
     non utili alla descrizione del dominio, ma volti alla soluzione (non
     devono vedersi, ad esempio, campi o metodi privati, o cose che non
     siano equivalenti ad interfacce).
 
-### Esempio {#esempio-1 .unnumbered}
+### Esempio
 
 GLaDOS dovrà essere in grado di accedere ad un'insieme di camere di
 test. Tale insieme di camere prende il nome di percorso. Ciascuna camera
@@ -243,7 +225,9 @@ all'utente (subject), dipendenti da possibili eventi. GLaDOS dovrà poter
 comunicare coi locali cucina per approntare le torte. Le torte potranno
 essere dolci, oppure semplici promesse di dolci che verranno disattese.
 
-Gli elementi costitutivi il problema sono sintetizzati in .
+Gli elementi costitutivi il problema sono sintetizzati nella seguente figura.
+
+![image](https://user-images.githubusercontent.com/1991673/207670821-7e397c72-85d5-476d-86d0-2f2779fc932c.png)
 
 La difficoltà primaria sarà quella di riuscire a correlare lo stato
 corrente dell'utente e gli eventi in modo tale da generare i corretti
@@ -258,9 +242,6 @@ Il requisito non funzionale riguardante il consumo energetico richiederà
 studi specifici sulle performance di GLaDOS che non potranno essere
 effettuati all'interno del monte ore previsto: tale feature sarà oggetto
 di futuri lavori.
-
-![Schema UML dell'analisi del problema, con rappresentate le entità
-principali ed i rapporti fra loro](img/analysis.pdf){#img:analysis}
 
 # Design
 
@@ -278,76 +259,35 @@ affrontati i principali aspetti dell'applicazione.
 ## Architettura
 
 Questa sezione spiega come le componenti principali del software
-interagiscono fra loro. In particolare, qui va spiegato **se** e
-**come** è stato utilizzato il pattern architetturale
-model-view-controller (e/o alcune sue declinazioni specifiche, come
-entity-control-boundary).
-
-Se non è stato utilizzato MVC, va spiegata in maniera molto accurata
-l'architettura scelta, giustificandola in modo appropriato.
-
-Se è stato scelto MVC, vanno identificate con precisione le interfacce e
-classi che rappresentano i punti d'ingresso per modello, view, e
-controller. Raccomandiamo di sfruttare la definizione del dominio fatta
-in fase di analisi per capire quale sia l'entry point del model, e di
-non realizzare un'unica macro-interfaccia che, spesso, finisce con
-l'essere il prodromo ad una "God class". Consigliamo anche di separare
-bene controller e model, facendo attenzione a non includere nel secondo
-strategie d'uso che appartengono al primo.
+interagiscono fra loro.
 
 In questa sezione vanno descritte, per ciascun componente architetturale
 che ruoli ricopre (due o tre ruoli al massimo), ed in che modo
 interagisce (ossia, scambia informazioni) con gli altri componenti
-dell'architettura. Raccomandiamo di porre particolare attenzione al
-design dell'interazione fra view e controller: se ben progettato,
-sostituire in blocco la view non dovrebbe causare alcuna modifica nel
-controller (tantomeno nel model).
+dell'architettura.
 
-### Elementi positivi {#elementi-positivi-2 .unnumbered}
+### Elementi positivi
 
 -   Si mostrano pochi, mirati schemi UML dai quali si deduce con
     chiarezza quali sono le parti principali del software e come
     interagiscono fra loro.
 
--   Si mette in evidenza se e come il pattern architetturale
-    model-view-controller è stato applicato, anche con l'uso di un UML
-    che mostri le interfacce principali ed i rapporti fra loro.
-
--   Si discute se sia semplice o meno, con l'architettura scelta,
-    sostituire in blocco la view: in un MVC ben fatto, controller e
-    modello non dovrebbero in alcun modo cambiare se si transitasse da
-    una libreria grafica ad un'altra (ad esempio, da Swing a JavaFX, o
-    viceversa).
-
 ### Elementi negativi {#elementi-negativi-2 .unnumbered}
 
--   L'architettura è fatta in modo che sia impossibile riusare il
-    modello per un software diverso che affronta lo stesso problema.
-
--   L'architettura è tale che l'aggiunta di una funzionalità sul
-    controller impatta pesantemente su view e/o modello.
-
--   L'architettura è tale che la sostituzione in blocco della view
-    impatta sul controller o, peggio ancora, sul modello.
-
 -   Si presentano UML caotici, difficili da leggere.
-
 -   Si presentano UML in cui sono mostrati elementi di dettaglio non
     appartenenti all'architettura, ad esempio includenti campi o con
     metodi che non interessano la parte di interazione fra le componenti
     principali del software.
-
 -   Si presentano schemi UML con classi (nel senso UML del termine) che
     "galleggiano" nello schema, non connesse, ossia senza relazioni con
     il resto degli elementi inseriti.
-
 -   Si presentano elementi di design di dettaglio, ad esempio tutte le
     classi e interfacce del modello o della view.
-
 -   Si discutono aspetti implementativi, ad esempio eventuali librerie
     usate oppure dettagli di codice.
 
-### Esempio {#esempio-2 .unnumbered}
+### Esempio
 
 L'architettura di GLaDOS segue il pattern architetturale MVC. Più nello
 specifico, a livello architetturale, si è scelto di utilizzare MVC in
@@ -365,12 +305,15 @@ che c'è un cambio alla situazione del soggetto, GLaDOS notifica i suoi
 Output, informandoli su quale sia la situazione corrente.
 Conseguentemente, GLaDOS è un "observable" per Output.
 
-![Schema UML architetturale di GLaDOS. L'interfaccia `GLaDOS` è il
-controller del sistema, mentre `Input` ed `Output` sono le interfacce
+Il seguente è lo schema UML architetturale di GLaDOS.
+L'interfaccia `GLaDOS` è il
+controller del sistema,
+mentre `Input` ed `Output` sono le interfacce
 che mappano la view (o, più correttamente in questo specifico esempio,
 il boundary). Un'eventuale interfaccia grafica interattiva dovrà
-implementarle entrambe.](img/arch.pdf){#img:goodarch
-width="\\textwidth"}
+implementarle entrambe.
+
+![image](https://user-images.githubusercontent.com/1991673/207671604-1acce387-bf74-4178-ba6d-b96168cbd5c8.png)
 
 Con questa architettura, possono essere aggiunti un numero arbitrario di
 input ed output all'intelligenza artificiale. Ovviamente, mentre
@@ -401,7 +344,9 @@ vostro software: è un livello di dettaglio proprio della documentazione
 dell'API (deducibile dalla Javadoc).
 
 **È necessario che ciascun membro del gruppo abbia una propria sezione
-di design dettagliato, di cui sarà il solo responsabile**. Ciascun
+di design dettagliato, di cui sarà il solo responsabile**.
+
+Ciascun
 autore dovrà spiegare in modo corretto e giustamente approfondito (non
 troppo in dettaglio, non superficialmente) il proprio contributo. È
 importante focalizzarsi sulle scelte che hanno un impatto positivo sul
@@ -424,14 +369,11 @@ si vuole approfondire, si presenti:
 1.  : una breve descrizione in linguaggio naturale del problema che si
     vuole risolvere, se necessario ci si può aiutare con schemi o
     immagini;
-
 2.  : una descrizione della soluzione proposta, analizzando eventuali
     alternative che sono state prese in considerazione, e che descriva
     pro e contro della scelta fatta;
-
 3.  : uno schema UML che aiuti a comprendere la soluzione sopra
     descritta;
-
 4.  : se la soluzione è stata realizzata utilizzando uno o più pattern
     noti, si spieghi come questi sono reificati nel progetto (ad
     esempio: nel caso di Template Method, qual è il metodo template; nel
@@ -446,30 +388,24 @@ negativamente: a tal proposito, si raccomanda di porre particolare
 attenzione all'abuso di Singleton, che, se usato in modo inappropriato,
 è di fatto un anti-pattern.
 
-### Elementi positivi {#elementi-positivi-3 .unnumbered}
+### Elementi positivi
 
 -   Ogni membro del gruppo discute le proprie decisioni di
     progettazione, ed in particolare le azioni volte ad anticipare
     possibili cambiamenti futuri (ad esempio l'aggiunta di una nuova
     funzionalità, o il miglioramento di una esistente).
-
 -   Si mostrano le principali interazioni fra le varie componenti che
     collaborano alla soluzione di un determinato problema.
-
 -   Si identificano, utilizzano *appropriatamente*, e descrivono diversi
     design pattern.
-
 -   Ogni membro del gruppo identifica i pattern utilizzati nella sua
     sottoparte.
-
 -   Si mostrano gli aspetti di design più rilevanti dell'applicazione,
     mettendo in luce la maniera in cui si è costruita la soluzione ai
     problemi descritti nell'analisi.
-
 -   Si tralasciano aspetti strettamente implementativi e quelli non
     rilevanti, non mostrandoli negli schemi UML (ad esempio, campi
     privati) e non descrivendoli.
-
 -   Ciascun elemento di design identificato presenta una piccola
     descrizione del problema calato nell'applicazione, uno schema UML
     che ne mostra la concretizzazione nelle classi del progetto, ed una
@@ -481,46 +417,33 @@ attenzione all'abuso di Singleton, che, se usato in modo inappropriato,
     se si usa Strategy, è necessario identificare l'interfaccia che
     rappresenta la strategia; e via dicendo.
 
-### Elementi negativi {#elementi-negativi-3 .unnumbered}
+### Elementi negativi
 
 -   Il design del modello risulta scorrelato dal problema descritto in
     analisi.
-
 -   Si tratta in modo prolisso, classe per classe, il software
     realizzato, o comunque si riduce la sezione ad un mero elenco di
     quanto fatto.
-
 -   Non si presentano schemi UML esemplificativi.
-
 -   Non si individuano design pattern, o si individuano in modo errato
     (si spaccia per design pattern qualcosa che non lo è).
-
--   Si utilizzano design pattern in modo inopportuno. Un esempio
-    classico è l'abuso di Singleton per entità che possono essere
-    univoche ma non devono necessariamente esserlo. Si rammenta che
-    Singleton ha senso nel secondo caso (ad esempio `System` e `Runtime`
-    sono singleton), mentre rischia di essere un problema nel secondo.
-    Ad esempio, se si rendesse singleton il motore di un videogioco,
-    sarebbe impossibile riusarlo per costruire un server per partite
-    online (dove, presumibilmente, si gestiscono parallelamente più
-    partite).
-
+-   Si utilizzano design pattern in modo inopportuno.
 -   Si producono schemi UML caotici e difficili da leggere, che
     comprendono inutili elementi di dettaglio.
-
 -   Si presentano schemi UML con classi (nel senso UML del termine) che
     "galleggiano" nello schema, non connesse, ossia senza relazioni con
     il resto degli elementi inseriti.
-
 -   Si tratta in modo inutilmente prolisso la divisione in package,
     elencando ad esempio le classi una per una.
 
-### Esempio minimale (e quindi parziale) di sezione di progetto con UML ben realizzati {#esempio-minimale-e-quindi-parziale-di-sezione-di-progetto-con-uml-ben-realizzati .unnumbered}
+### Esempio minimale (e quindi parziale) di sezione di progetto con UML ben realizzati
 
 #### Personalità intercambiabili
 
-![Rappresentazione UML del pattern Strategy per la personalità di
-GLaDOS](img/strategy.pdf){#img:strategy width="\\textwidth"}
+Rappresentazione UML del pattern Strategy per la personalità di
+GLaDOS
+
+![image](https://user-images.githubusercontent.com/1991673/207672018-5d930fd5-a3c9-4f6b-bc16-a7bdee3c2c0f.png)
 
 ##### Problema
 
