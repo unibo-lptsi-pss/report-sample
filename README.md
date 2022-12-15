@@ -227,7 +227,66 @@ essere dolci, oppure semplici promesse di dolci che verranno disattese.
 
 Gli elementi costitutivi il problema sono sintetizzati nella seguente figura.
 
-![image](https://user-images.githubusercontent.com/1991673/207670821-7e397c72-85d5-476d-86d0-2f2779fc932c.png)
+```mermaid
+classDiagram
+
+class Suggestion
+<<interface>> Suggestion
+
+class Event
+<<interface>> Event
+
+class Personality
+<<interface>> Personality
+
+class Kitchen {
+    +orderCake(): Cake
+}
+<<interface>> Kitchen
+
+class Cake {
+    +isALie(): boolean
+}
+<<interface>> Cake
+
+class AI {
+    +addKitchen(Kitchen)
+    +computeSuggestion(Subject, Event): Suggestion
+    +setPersonality(Personality)
+}
+<<interface>> AI
+
+class Subject {
+    +getPath(Path)
+    +getCurrentChamber(): Chamber
+    +getCurrentChallenge(): Challenge
+}
+<<interface>> Subject
+
+class Challenge
+<<interface>> Challenge
+
+class Chamber {
+    +getChallenges(): List~Challenge~
+}
+<<interface>> Chamber
+
+class Path {
+    +getChambers(): List~Chamber~
+}
+<<interface>> Path
+
+AI --* Personality
+AI -- Suggestion
+AI -- Event
+AI --o Kitchen
+Kitchen -- Cake
+AI -- Subject
+Subject -- Challenge
+Challenge --* Chamber
+Chamber --* Path
+Subject -- Path
+```
 
 La difficoltà primaria sarà quella di riuscire a correlare lo stato
 corrente dell'utente e gli eventi in modo tale da generare i corretti
