@@ -82,9 +82,8 @@ classDiagram
     }
 ```
 
-Gli schemi in questa relazione furono
-realizzati con StarUML. Come per la prosa, non è importante quale
-strumento sia utilizzato, ma è vitale che gli schemi siano di buona
+Come per la prosa, non è importante quale
+strumento venga utilizzato, ma è vitale che gli schemi siano di buona
 qualità e ben leggibili.
 
 # Analisi
@@ -556,7 +555,30 @@ attenzione all'abuso di Singleton, che, se usato in modo inappropriato,
 Rappresentazione UML del pattern Strategy per la personalità di
 GLaDOS
 
-![image](https://user-images.githubusercontent.com/1991673/207672018-5d930fd5-a3c9-4f6b-bc16-a7bdee3c2c0f.png)
+```mermaid
+classDiagram
+
+class Personality {
+    onSuccess()
+}
+<<interface>> Personality
+
+class AbstractPersonality {
+    +onSuccess()
+}
+<<abstract>> AbstractPersonality
+
+class AI {
+    +setPersonality(Personality)
+}
+<<interface>> AI
+
+AbstractPersonality --|> Personality
+Personality -- AI
+Good --|> AbstractPersonality
+Evil --|> AbstractPersonality
+
+```
 
 ##### Problema
 
@@ -575,8 +597,26 @@ GLaDOS.
 Rappresentazione UML dell'applicazione del pattern Template Method
 alla gerarchia delle Personalità
 
-![Rappresentazione UML dell'applicazione del pattern Template Method
-alla gerarchia delle Personalità](https://user-images.githubusercontent.com/1991673/207832317-83618637-13a5-4bd1-90ed-4cc88c3d965e.png)
+```mermaid
+classDiagram
+
+class AbstractPersonality {
+    #makeCake() Cake
+    +onSuccess()
+}
+<<abstract>> AbstractPersonality
+
+class Good {
+    #makeCake() Cake
+}
+
+class Evil {
+    #makeCake() Cake
+}
+
+Good --|> AbstractPersonality
+Evil --|> AbstractPersonality
+```
 
 ##### Problema
 
@@ -600,7 +640,20 @@ protetto `makeCake()`.
 Il pattern Observer è usato per consentire a GLaDOS di informare tutti
 i sistemi di output in ascolto.
 
-![image](https://user-images.githubusercontent.com/1991673/207835533-e6619c98-4913-4847-9df5-a2bf9493469c.png)
+```mermaid
+classDiagram
+
+class Output {
+    +update(Subject)
+}
+class GLaDOS {
+    -List~Output~ outputs
+}
+MonitorGui --|> Output
+Logger --|> Output
+GLaDOS o-- Output
+
+```
 
 ##### Problema
 
