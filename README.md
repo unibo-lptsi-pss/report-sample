@@ -324,7 +324,7 @@ dell'architettura.
     chiarezza quali sono le parti principali del software e come
     interagiscono fra loro.
 
-### Elementi negativi {#elementi-negativi-2 .unnumbered}
+### Elementi negativi
 
 -   Si presentano UML caotici, difficili da leggere.
 -   Si presentano UML in cui sono mostrati elementi di dettaglio non
@@ -380,8 +380,6 @@ class AI {
 
 class Output {
     +update(Subject)
-    +registerView(Output)
-    +computeSuggestion(Subject, Event) Suggestion
 }
 <<interface>> Output
 
