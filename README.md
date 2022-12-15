@@ -390,7 +390,7 @@ class Personality
 <<interface>> Personality
 
 class Input {
-    +getBlocking(): Event
+    +getBlocking() Event
 }
 <<interface>> Input
 
