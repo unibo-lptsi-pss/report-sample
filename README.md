@@ -372,7 +372,61 @@ che mappano la view (o, più correttamente in questo specifico esempio,
 il boundary). Un'eventuale interfaccia grafica interattiva dovrà
 implementarle entrambe.
 
-![image](https://user-images.githubusercontent.com/1991673/207671604-1acce387-bf74-4178-ba6d-b96168cbd5c8.png)
+```mermaid
+classDiagram
+
+class Event
+<<interface>> Event
+
+class AI {
+    +registerInputSource(Input)
+    +registerView(Output)
+    +computeSuggestion(Subject, Event) Suggestion
+}
+<<interface>> AI
+
+class Output {
+    +update(Subject)
+    +registerView(Output)
+    +computeSuggestion(Subject, Event) Suggestion
+}
+<<interface>> Output
+
+class Subject
+<<interface>> Subject
+
+class Personality
+<<interface>> Personality
+
+class Input {
+    +getBlocking(): Event
+}
+<<interface>> Input
+
+class GLaDOS {
+    -List~Output~ outputs
+    -List~Input~ inputs
+    -Personality personality 
+}
+
+class AbstractSensor {
+    +getName() String
+}
+
+GLaDOS --|> AI
+AI o-- Output
+AI o-- Input
+GLaDOS o-- Output
+GLaDOS o-- Input
+Event -- AI
+Event -- Input
+Subject -- AI
+Personality --o GLaDOS 
+Personality --o AI
+Output -- Subject
+AbstractSensor --|> Input
+MonitorGui --|> Output
+```
 
 Con questa architettura, possono essere aggiunti un numero arbitrario di
 input ed output all'intelligenza artificiale. Ovviamente, mentre
