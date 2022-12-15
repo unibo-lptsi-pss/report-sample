@@ -658,7 +658,7 @@ Conseguentemente, è *molto* conveniente *citare* una fonte ed usarla
 invece di tentare di spacciare per proprio il lavoro di altri.
 - Si elencano design pattern
 
-### Esempiohttps://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/model/ProtelisIncarnation.java#L98-L120
+### Esempio
 
 #### Utilizzo della libreria SLF4J
 
