@@ -658,7 +658,124 @@ Conseguentemente, è *molto* conveniente *citare* una fonte ed usarla
 invece di tentare di spacciare per proprio il lavoro di altri.
 - Si elencano design pattern
 
+### Esempiohttps://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/model/ProtelisIncarnation.java#L98-L120
 
+#### Utilizzo della libreria SLF4J
+
+**Dove**: diverse classi, ad esempio `it.unibo.alchemist.boundary.swingui.effect.impl.EffectBuilder`
+
+**Permalink**: https://github.com/AlchemistSimulator/Alchemist/blob/5c17f8b76920c78d955d478864ac1f11508ed9ad/alchemist-swingui/src/main/java/it/unibo/alchemist/boundary/swingui/effect/impl/EffectBuilder.java#L49
+
+**Snippet**
+
+```java
+    private static final Logger L = LoggerFactory.getLogger(EffectBuilder.class);
+...
+        try {
+            barrier.await();
+        } catch (final InterruptedException e) {
+            L.error("Bug in " + getClass(), e);
+        }
+...
+}
+```
+
+#### Utilizzo della `LoadingCache` di Google Guava
+
+**Dove**: `it.unibo.alchemist.protelis.AlchemistExecutionContext`
+
+**Permalink**: https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/protelis/AlchemistExecutionContext.java#L63-L79
+
+**Snippet**
+
+```java
+private final LoadingCache<P, Double> cache = CacheBuilder.newBuilder()
+    .expireAfterAccess(10, TimeUnit.MINUTES)
+    .maximumSize(100)
+    .build(new CacheLoader<>() {
+        @Nonnull
+        @Override
+        public Double load(@Nonnull final P dest) {
+        if (environment instanceof MapEnvironment) {
+            if (dest instanceof GeoPosition) {
+                return ((MapEnvironment<Object, ?, ?>) environment).computeRoute(node, (GeoPosition) dest).length();
+            } else {
+                throw new IllegalStateException("Illegal position type: " + dest.getClass() + " " + dest);
+            }
+        }
+        return getDevicePosition().distanceTo(dest);
+    }
+});
+```
+
+#### Scrittura di metodo generico con parametri contravarianti
+
+**Dove**: `it.unibo.alchemist.protelis.AlchemistExecutionContext`
+
+**Permalink**: https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/protelis/AlchemistExecutionContext.java#L141-L143
+
+**Snippet**
+```java
+private <X> Field<X> buildFieldWithPosition(final Function<? super P, X> fun) {
+    return buildField(fun, getDevicePosition());
+}
+```
+
+#### Utilizzo della libreria `Stream` e di lambda expressions
+
+**Dove**: molte classi, ad esempio `it.unibo.alchemist.model.ProtelisIncarnation`
+
+**Permalink**: https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/model/ProtelisIncarnation.java#L98-L120
+
+**Snippet**
+```java
+@Nonnull
+private static List<RunProtelisProgram<?>> getIncomplete(
+    final Node<?> protelisNode,
+    final List<RunProtelisProgram<?>> alreadyDone
+) {
+    return protelisNode.getReactions().stream()
+        /*
+        * Get the actions
+        */
+        .flatMap(r -> r.getActions().stream())
+        /*
+        * Get only the ProtelisPrograms
+        */
+        .filter(a -> a instanceof RunProtelisProgram)
+        .map(a -> (RunProtelisProgram<?>) a)
+        /*
+        * Retain only those ProtelisPrograms that have no associated ComputationalRoundComplete.
+        *
+        * Only one should be available.
+        */
+        .filter(prog -> !alreadyDone.contains(prog))
+        .collect(Collectors.toList());
+}
+```
+
+#### Protezione da corse critiche usando `Semaphore`
+
+**Dove**: `it.unibo.alchemist.model.ProtelisIncarnation.DummyContext`
+
+**Permalink**: https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/model/ProtelisIncarnation.java#L388-L440
+
+**Snippet**
+
+```java
+private static final Semaphore MUTEX = new Semaphore(1);
+private static final int SEED = -241_837_578;
+private static final RandomGenerator RNG = new MersenneTwister(SEED);
+...
+@Override
+public double nextRandomDouble() {
+    final double result;
+    MUTEX.acquireUninterruptibly();
+    result = RNG.nextDouble();
+    MUTEX.release();
+    return result;
+}
+```
 
 # Commenti finali
 
