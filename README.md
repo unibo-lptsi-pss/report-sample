@@ -103,11 +103,7 @@ Nell'analisi dei *requisiti* dell'applicazione si dovrà spiegare cosa
 l'applicazione dovrà fare. Non ci si deve concentrare sui particolari
 problemi, ma esclusivamente su cosa si desidera che l'applicazione
 faccia. Al termine della lettura della sezione, il docente deve avere
-un'idea molto chiara di cosa l'applicazione sia. È consigliato
-descrivere separatamente i requisiti funzionali (quelli che descrivono
-l'effettivo comportamento dell'applicazione) da quelli non funzionali
-(requisiti che non riguardano direttamente aspetti comportamentali, come
-sicurezza, performance, eccetera).
+un'idea molto chiara di cosa l'applicazione sia.
 
 ### Elementi positivi
 
@@ -116,8 +112,6 @@ sicurezza, performance, eccetera).
 -   Gli obiettivi sono spiegati con chiarezza, per punti.
 -   Se vi sono termini il cui significato non è immediatamente
     intuibile, essi vengono spiegati.
--   Vengono descritti separatamente requisiti funzionali e non
-    funzionali.
 -   Considerato a un paio di pagine un limite ragionevole alla lunghezza
     della parte sui requisiti, in quello spazio si deve cercare di
     chiarire *tutti* gli aspetti dell'applicazione, non lasciando
