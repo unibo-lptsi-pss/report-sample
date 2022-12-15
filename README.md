@@ -459,9 +459,11 @@ GLaDOS.
 
 #### Riuso del codice delle personalità
 
+Rappresentazione UML dell'applicazione del pattern Template Method
+alla gerarchia delle Personalità
+
 ![Rappresentazione UML dell'applicazione del pattern Template Method
-alla gerarchia delle Personalità](img/template.pdf){#img:template
-width="\\textwidth"}
+alla gerarchia delle Personalità](https://user-images.githubusercontent.com/1991673/207832317-83618637-13a5-4bd1-90ed-4cc88c3d965e.png)
 
 ##### Problema
 
@@ -482,9 +484,10 @@ protetto `makeCake()`.
 
 #### Gestione di output multipli
 
-![Il pattern Observer è usato per consentire a GLaDOS di informare tutti
-i sistemi di output in ascolto](img/observer.pdf){#img:observer
-width=".7\\textwidth"}
+Il pattern Observer è usato per consentire a GLaDOS di informare tutti
+i sistemi di output in ascolto.
+
+![image](https://user-images.githubusercontent.com/1991673/207835533-e6619c98-4913-4847-9df5-a2bf9493469c.png)
 
 ##### Problema
 
@@ -504,35 +507,26 @@ uno-a-molti fra `GLaDOS` ed i sistemi di output. La scelta è quindi
 ricaduta sul *pattern Observer*: `GLaDOS` è observable, e le istanze di
 `Output` sono observer. Il suo utilizzo è esemplificato in
 
-### Contro-esempio: pessimo diagramma UML {#contro-esempio-pessimo-diagramma-uml .unnumbered}
+### Contro-esempio: pessimo diagramma UML 
 
-In è mostrato il modo **sbagliato** di fare le cose. Questo schema è
+![badarch](https://user-images.githubusercontent.com/1991673/207835689-932d3c09-cd0b-4144-a34b-20974a6bcf1c.jpg)
+
+Qui sopra è mostrato il modo **sbagliato** di fare le cose. Questo schema è
 fatto male perché:
-
 -   È caotico.
-
 -   È difficile da leggere e capire.
-
 -   Vi sono troppe classi, e non si capisce bene quali siano i rapporti
     che intercorrono fra loro.
-
 -   Si mostrano elementi implementativi irrilevanti, come i campi e i
     metodi privati nella classe `AbstractEnvironment`.
-
 -   Se l'intenzione era quella di costruire un diagramma architetturale,
     allora lo schema è ancora più sbagliato, perché mostra pezzi di
     implementazione.
-
 -   Una delle classi, in alto al centro, galleggia nello schema, non
     connessa a nessuna altra classe, e di fatto costituisce da sola un
     secondo schema UML scorrelato al resto
-
 -   Le interfacce presentano tutti i metodi e non una selezione che
     aiuti il lettore a capire quale parte del sistema si vuol mostrare.
-
-![Schema UML mal fatto e con una pessima descrizione, che non aiuta a
-capire. Don't try this at home.](img/badarch.jpg){#img:badarch
-width="\\textwidth"}
 
 # Sviluppo
 
@@ -540,239 +534,139 @@ width="\\textwidth"}
 
 Il testing automatizzato è un requisito di qualunque progetto software
 che si rispetti, e consente di verificare che non vi siano regressioni
-nelle funzionalità a fronte di aggiornamenti. Per quanto riguarda questo
+nelle funzionalità a fronte di aggiornamenti.
+Per quanto riguarda questo
 progetto è considerato sufficiente un test minimale, a patto che sia
 completamente automatico. Test che richiedono l'intervento da parte
 dell'utente sono considerati *negativamente* nel computo del punteggio
 finale.
 
-### Elementi positivi {#elementi-positivi-4 .unnumbered}
+### Elementi positivi
 
 -   Si descrivono molto brevemente i componenti che si è deciso di
     sottoporre a test automatizzato.
-
 -   Si utilizzano suite specifiche (e.g. JUnit) per il testing
     automatico.
 
 ### Elementi negativi {#elementi-negativi-4 .unnumbered}
 
 -   Non si realizza alcun test automatico.
-
 -   La non presenza di testing viene aggravata dall'adduzione di
     motivazioni non valide. Ad esempio, si scrive che l'interfaccia
     grafica non è testata automaticamente perché è *impossibile*
-    farlo[^5].
-
+    farlo (testare in modo automatico le interfacce grafiche è possibile, si veda, come esempio,
+    [TestFX](https://github.com/TestFX/TestFX);
+    semplicemente, nel corso non c'è modo e tempo di introdurvi questo
+    livello di complessità).
 -   Si descrive un testing di tipo manuale in maniera prolissa.
-
 -   Si descrivono test effettuati manualmente che sarebbero potuti
     essere automatizzati, ad esempio scrivendo che si è usata
     l'applicazione manualmente.
-
 -   Si descrivono test non presenti nei sorgenti del progetto.
-
 -   I test, quando eseguiti, falliscono.
-
-## Metodologia di lavoro
-
-Ci aspettiamo, leggendo questa sezione, di trovare conferma alla
-divisione operata nella sezione del design di dettaglio, e di capire
-come è stato svolto il lavoro di integrazione. **Andrà realizzata una
-sotto-sezione separata per ciascuno studente** che identifichi le
-porzioni di progetto sviluppate, separando quelle svolte in autonomia da
-quelle sviluppate in collaborazione. Diversamente dalla sezione di
-design, in questa è consentito elencare package/classi, se lo studente
-ritiene sia il modo più efficace di convogliare l'informazione. Si
-ricorda che l'impegno deve giustificare circa 40-50 ore di sviluppo (è
-normale e fisiologico che approssimativamente la metà del tempo sia
-impiegata in analisi e progettazione).
-
-### Elementi positivi {#elementi-positivi-5 .unnumbered}
-
--   Si identifica con precisione il ruolo di ciascuno all'interno del
-    gruppo, ossia su quale parte del progetto ciascuno dei componenti si
-    è concentrato maggiormente.
-
--   La divisione dei compiti è equa, ossia non vi sono membri del gruppo
-    che hanno svolto molto più lavoro di altri.
-
--   La divisione dei compiti è coerente con quanto descritto nelle parti
-    precedenti della relazione.
-
--   La divisione dei compiti è realistica, ossia le dipendenze fra le
-    parti sviluppate sono minime.
-
--   Si identifica quale parte del software è stato sviluppato da tutti i
-    componenti insieme.
-
--   Si spiega in che modo si sono integrate le parti di codice
-    sviluppate separatamente, evidenziando eventuali problemi. Ad
-    esempio, una strategia è convenire sulle interfacce da usare (ossia,
-    occuparsi insieme di stabilire l'architettura) e quindi procedere
-    indipendentemente allo sviluppo di parti differenti. Una possibile
-    problematica potrebbe essere una dimenticanza in fase di design
-    architetturale che ha costretto ad un cambio e a modifiche in fase
-    di integrazione. Una situazione simile è la norma nell'ingegneria di
-    un sistema software non banale, ed il processo di progettazione
-    top-down con raffinamento successivo è il così detto processo "a
-    spirale".
-
--   Si descrive in che modo è stato impiegato il DVCS.
-
-### Elementi negativi {#elementi-negativi-5 .unnumbered}
-
--   Non si chiarisce chi ha fatto cosa.
-
--   C'è discrepanza fra questa sezione e le sezioni che descrivono il
-    design dettagliato.
-
--   Tutto il progetto è stato svolto lavorando insieme invece che
-    assegnando una parte a ciascuno.
-
--   Non viene descritta la metodologia di integrazione delle parti
-    sviluppate indipendentemente.
-
--   Uso superficiale del DVCS.
 
 ## Note di sviluppo
 
 Questa sezione, come quella riguardante il design dettagliato va svolta
-**singolarmente da ogni membro del gruppo**. Ciascuno dovrà mettere in
-evidenza eventuali particolarità del suo metodo di sviluppo, ed in
-particolare:
+**singolarmente da ogni membro del gruppo**.
 
--   **Elencare** (fare un semplice elenco per punti, non un testo!) le
-    feature *avanzate* del linguaggio e dell'ecosistema Java che sono
-    state utilizzate. Le feature di interesse sono:
+Ciascuno dovrà mettere in
+evidenza da un minimo di 3 ad un massimo di 5 punti in cui ritiene di aver scritto codice particolarmente ben congegnato,
+ad esempio perché sfrutta una libreria o feature avanzata non vista a lezione,
+oppure perché usa costrutti del linguaggio avanzati.
 
-    -   Progettazione con generici, ad esempio costruzione di nuovi tipi
-        generici, e uso di generici bounded. L'uso di classi generiche
-        di libreria non è considerato avanzato.
+Ciascun elemento deve presentare:
+1. Nome del sorgente dove reperirlo, a scelta uno fra:
+   * nome qualificato della classe
+   * percorso del file
+   * permalink GitHub
+2. Uno snippet con il codice cui ci si riferisce
+3. Una *brevissima* descrizione della feature avanzata che si vuole mostrare.
 
-    -   Uso di lambda expressions
-
-    -   Uso di `Stream`, di `Optional` o di altri costrutti funzionali
-
-    -   Uso della reflection
-
-    -   Definizione ed uso di nuove annotazioni
-
-    -   Uso del Java Platform Module System
-
-    -   Uso di parti della libreria JDK non spiegate a lezione
-        (networking, compressione, parsing XML, eccetera\...)
-
-    -   Uso di librerie di terze parti (incluso JavaFX): Google Guava,
-        Apache Commons\...
-
-    Si faccia molta attenzione a non scrivere banalità, elencando qui
-    features di tipo "core", come le eccezioni, le enumerazioni, o le
-    inner class: nessuna di queste è considerata avanzata.
-
--   Descrivere *molto brevemente* le librerie utilizzate nella propria
-    parte di progetto, se non trattate a lezione (ossia, se librerie di
-    terze parti e/o se componenti del JDK non visti, come le socket). Si
-    ricorda che l'utilizzo di librerie è valutato *positivamente*.
-
--   Sviluppo di algoritmi particolarmente interessanti *non forniti da
-    alcuna libreria* (spesso può convenirvi chiedere sul forum se ci sia
-    una libreria per fare una certa cosa, prima di gettarvi a capofitto
-    per scriverla voi stessi).
+Esempi di feature interessanti potrebbero essere:
+- Progettazione con generici, ad esempio costruzione di nuovi tipi
+  generici, e uso di generici bounded.
+- Uso di lambda expressions
+- Uso di `Stream`, di `Optional` o di altri costrutti funzionali
+- Uso della reflection
+- Definizione ed uso di nuove annotazioni
+- Uso del Java Platform Module System
+- Uso di parti della libreria JDK non spiegate a lezione
+  (networking, compressione, parsing XML, eccetera)
+- Uso di librerie di terze parti: JavaFX, Google Guava, Apache Commons...
+- Sviluppo di algoritmi particolarmente interessanti
+  *non forniti da alcuna libreria*
+  (spesso può convenirvi chiedere sul forum se ci sia
+  una libreria per fare una certa cosa, prima di gettarvi a capofitto
+  per scriverla voi stessi).
 
 In questa sezione, *dopo l'elenco*, vanno menzionati ed attributi con
-precisione eventuali pezzi di codice "riadattati" (o scopiazzati\...) da
+precisione eventuali pezzi di codice "riadattati" (o scopiazzati...) da
 Internet o da altri progetti, pratica che tolleriamo ma che non
-raccomandiamo. Si rammenta agli studenti che non è consentito partire da
-progetti esistenti e procedere per modifiche successive. Si ricorda
+raccomandiamo.
+Si rammenta agli studenti che non è consentito partire da
+progetti esistenti e procedere per modifiche successive.
+Si ricorda
 anche che i docenti hanno in mano strumenti antiplagio piuttosto
 raffinati e che "capiscono" il codice e la storia delle modifiche del
 progetto, per cui tecniche banali come cambiare nomi (di classi, metodi,
 campi, parametri, o variabili locali), aggiungere o togliere commenti,
 oppure riordinare i membri di una classe vengono individuate senza
-problemi. Le regole del progetto spiegano in dettaglio l'approccio dei
+problemi.
+Le regole del progetto spiegano in dettaglio l'approccio dei
 docenti verso atti gravi come il plagiarismo.
 
 I pattern di design **non** vanno messi qui. L'uso di pattern di design
 (come suggerisce il nome) è un aspetto avanzato di design, non di
 implementazione, e non va in questa sezione.
 
-### Elementi positivi {#elementi-positivi-6 .unnumbered}
+### Elementi positivi
 
--   Si elencano gli aspetti avanzati di linguaggio che sono stati
-    impiegati
+- Ogni studente ha almeno 3 sottosezioni con snippet e descrizione
+- Nessuno studente ha più di 5 sottosezioni con snippet e descrizione
+- Si identificano parti di codice prese da altri progetti, dal web, o
+comunque scritte in forma originale da altre persone. In tal senso,
+si ricorda che agli ingegneri non è richiesto di re-inventare la
+ruota continuamente: se si cita debitamente la sorgente è tollerato
+fare uso di di snippet di codice open source per risolvere
+velocemente problemi non banali. Nel caso in cui si usino snippet di
+codice di qualità discutibile, oltre a menzionarne l'autore
+originale si invitano gli studenti ad adeguare tali parti di codice
+agli standard e allo stile del progetto. Contestualmente, si fa
+presente che è largamente meglio fare uso di una libreria che
+copiarsi pezzi di codice: qualora vi sia scelta (e tipicamente c'è),
+si preferisca la prima via.
 
--   Si elencano le librerie che sono state utilizzate
-
--   Si descrivono aspetti particolarmente complicati o rilevanti
-    relativi all'implementazione, ad esempio, in un'applicazione
-    performance critical, un uso particolarmente avanzato di meccanismi
-    di caching, oppure l'implementazione di uno specifico algoritmo.
-
--   Se si è utilizzato un particolare algoritmo, se ne cita la fonte
-    originale. Ad esempio, se si è usato Mersenne Twister per la
-    generazione dei numeri pseudo-random, si cita [@mersenne].
-
--   Si identificano parti di codice prese da altri progetti, dal web, o
-    comunque scritte in forma originale da altre persone. In tal senso,
-    si ricorda che agli ingegneri non è richiesto di re-inventare la
-    ruota continuamente: se si cita debitamente la sorgente è tollerato
-    fare uso di di snippet di codice open source per risolvere
-    velocemente problemi non banali. Nel caso in cui si usino snippet di
-    codice di qualità discutibile, oltre a menzionarne l'autore
-    originale si invitano gli studenti ad adeguare tali parti di codice
-    agli standard e allo stile del progetto. Contestualmente, si fa
-    presente che è largamente meglio fare uso di una libreria che
-    copiarsi pezzi di codice: qualora vi sia scelta (e tipicamente c'è),
-    si preferisca la prima via.
-
-### Elementi negativi {#elementi-negativi-6 .unnumbered}
-
--   Si elencano feature core del linguaggio invece di quelle segnalate.
-    Esempi di feature core da non menzionare sono:
-
-    -   eccezioni;
-
-    -   classi innestate;
-
-    -   enumerazioni;
-
-    -   interfacce.
-
--   Si elencano applicazioni di terze parti (peggio se per usarle
-    occorre licenza, e lo studente ne è sprovvisto) che non c'entrano
-    nulla con lo sviluppo, ad esempio:
-
+### Elementi negativi
+- Si elencano applicazioni di terze parti
+  (peggio se per usarle occorre licenza, e lo studente ne è sprovvisto)
+  che non c'entrano nulla con lo sviluppo, ad esempio:
     -   Editor di grafica vettoriale come Inkscape o Adobe Illustrator;
-
     -   Editor di grafica scalare come GIMP o Adobe Photoshop;
-
     -   Editor di audio come Audacity;
-
     -   Strumenti di design dell'interfaccia grafica come SceneBuilder:
         il codice è in ogni caso inteso come sviluppato da voi.
+- Si descrivono aspetti di scarsa rilevanza, o si scende in dettagli inutili.
+- Sono presenti parti di codice sviluppate originalmente da altri che
+non vengono debitamente segnalate. In tal senso, si ricorda agli
+studenti che i docenti hanno accesso a tutti i progetti degli anni
+passati, a Stack Overflow, ai principali blog di sviluppatori ed
+esperti Java, ai blog dedicati allo sviluppo di soluzioni e
+applicazioni (inclusi blog dedicati ad Android e allo sviluppo di
+videogame), nonché ai vari GitHub, GitLab, e Bitbucket.
+Conseguentemente, è *molto* conveniente *citare* una fonte ed usarla
+invece di tentare di spacciare per proprio il lavoro di altri.
+- Si elencano design pattern
 
--   Si descrivono aspetti di scarsa rilevanza, o si scende in dettagli
-    inutili.
 
--   Sono presenti parti di codice sviluppate originalmente da altri che
-    non vengono debitamente segnalate. In tal senso, si ricorda agli
-    studenti che i docenti hanno accesso a tutti i progetti degli anni
-    passati, a Stack Overflow, ai principali blog di sviluppatori ed
-    esperti Java, ai blog dedicati allo sviluppo di soluzioni e
-    applicazioni (inclusi blog dedicati ad Android e allo sviluppo di
-    videogame), nonché ai vari GitHub, GitLab, e Bitbucket.
-    Conseguentemente, è *molto* conveniente *citare* una fonte ed usarla
-    invece di tentare di spacciare per proprio il lavoro di altri.
-
--   Si elencano design pattern
 
 # Commenti finali
 
 In quest'ultimo capitolo si tirano le somme del lavoro svolto e si
 delineano eventuali sviluppi futuri.
 
-*Nessuna delle informazioni incluse in questo capitolo verrà utilizzata
-per formulare la valutazione finale*, a meno che non sia assente o
+**Nessuna delle informazioni incluse in questo capitolo verrà utilizzata
+per formulare la valutazione finale**, a meno che non sia assente o
 manchino delle sezioni obbligatorie. Al fine di evitare pregiudizi
 involontari, l'intero capitolo verrà letto dai docenti solo dopo aver
 formulato la valutazione.
@@ -780,17 +674,15 @@ formulato la valutazione.
 ## Autovalutazione e lavori futuri
 
 **È richiesta una sezione per ciascun membro del gruppo,
-obbligatoriamente**. Ciascuno dovrà autovalutare il proprio lavoro,
+obbligatoriamente**.
+
+Ciascuno dovrà autovalutare il proprio lavoro,
 elencando i punti di forza e di debolezza in quanto prodotto. Si dovrà
 anche cercare di descrivere *in modo quanto più obiettivo possibile* il
 proprio ruolo all'interno del gruppo. Si ricorda, a tal proposito, che
 ciascuno studente è responsabile solo della propria sezione: non è un
 problema se ci sono opinioni contrastanti, a patto che rispecchino
-effettivamente l'opinione di chi le scrive. Nel caso in cui si pensasse
-di portare avanti il progetto, ad esempio perché effettivamente
-impiegato, o perché sufficientemente ben riuscito da poter esser usato
-come dimostrazione di esser capaci progettisti, si descriva brevemente
-verso che direzione portarlo.
+effettivamente l'opinione di chi le scrive.
 
 ## Difficoltà incontrate e commenti per i docenti
 
@@ -803,7 +695,7 @@ collegate all'esame, cosa impossibile da fare usando le valutazioni in
 aula per ovvie ragioni. È possibile che alcuni dei commenti forniti
 vengano utilizzati per migliorare il corso in futuro: sebbene non andrà
 a vostro beneficio, potreste fare un favore ai vostri futuri colleghi.
-Ovviamente *il contenuto della sezione non impatterà il voto finale*.
+Ovviamente **il contenuto della sezione non impatterà il voto finale**.
 
 # Guida utente
 
@@ -816,80 +708,14 @@ usa per la prima volta. Se, ad esempio, per cominciare una partita con
 un videogioco è necessario premere la barra spaziatrice, o il tasto "P",
 è necessario che gli studenti lo segnalino.
 
-### Elementi positivi {#elementi-positivi-7 .unnumbered}
+### Elementi positivi
 
 -   Si istruisce in modo semplice l'utente sull'uso dell'applicazione,
     eventualmente facendo uso di schermate e descrizioni.
 
-### Elementi negativi {#elementi-negativi-7 .unnumbered}
+### Elementi negativi
 
 -   Si descrivono in modo eccessivamente minuzioso tutte le
     caratteristiche, anche minori, del software in oggetto.
-
 -   Manca una descrizione che consenta ad un utente qualunque di
     utilizzare almeno le funzionalità primarie dell'applicativo.
-
-# Esercitazioni di laboratorio
-
-In questo capitolo ciascuno studente elenca gli esercizi di laboratorio
-che ha svolto (se ne ha svolti), elencando i permalink dei post sul
-forum dove è avvenuta la consegna. Questa sezione potrebbe essere
-processata da strumenti automatici, per cui link a oggetti diversi dal
-permalink della consegna, errori nell'email o nel nome del laboratorio
-possono portare ad ignorare alcune consegne, si raccomanda la massima
-precisione.
-
-## Esempio {#esempio-3 .unnumbered}
-
-### paolino.paperino@studio.unibo.it
-
--   Laboratorio 04:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=12345#p123456>
-
--   Laboratorio 06:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222>
-
--   Laboratorio 09:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999>
-
-### paperon.depaperoni@studio.unibo.it
-
--   Laboratorio 04:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=12345#p123456>
-
--   Laboratorio 05:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222>
-
--   Laboratorio 06:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999>
-
--   Laboratorio 07:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222>
-
--   Laboratorio 08:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999>
-
--   Laboratorio 09:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222>
-
--   Laboratorio 10:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999>
-
--   Laboratorio 11:
-    <https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222>
-
-[^1]: <https://mermaid.live/>
-
-[^2]: <https://plantuml.com/>
-
-[^3]: <http://aperturescience.com/>
-
-[^4]: Si fa presente che il pattern ECB effettivamente esiste in
-    letteratura come "istanza" di MVC, e chi volesse può utilizzarlo
-    come reificazione di MVC.
-
-[^5]: Testare in modo automatico le interfacce grafiche è possibile (si
-    veda, come esempio, <https://github.com/TestFX/TestFX>),
-    semplicemente nel corso non c'è modo e tempo di introdurvi questo
-    livello di complessità. Il fatto che non vi sia stato insegnato come
-    farlo non implica che sia impossibile!
