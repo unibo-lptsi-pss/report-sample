@@ -83,6 +83,7 @@ A proposito delle copiature.
 
 ## Domande Frequenti
 
+* *"A quanto ammonta l'impegno individuale stimato da dedicare al progetto?"*. Circa 60-75 ore (poco meno di 2 settimane piene di lavoro). Calcolo: 1 CFU corrisponde a 25 ore di lavoro. Per 9 CFU sono 225 ore. Abbiamo 100 ore di didattica frontale (aula e lab). Da queste scorporiamo altre 50-60 ore di studio autonomo a casa. Le risultanti sono quelle da dedicare al progetto. Ovviamente è solo una stima: in base ad ambizioni, impegni, continuità, inefficienze varie, il computo può variare. 
 * *"Posso utilizzare delle librerie esterne?"* Sì: l'utilizzo di librerie esterne è valutato positivamente,
   in quanto prevede la capacità di studiare autonomamente API non trattate durante il corso, facendo leva sulle nozioni apprese. Inoltre, librerie esterne possono semplificare alcuni task del progetto.
 * *"Posso utilizzare un framework?"* No: l'utilizzo di un framework potrebbe vincolare eccessivamente l'architettura dell'applicazione, e quindi risparmiarvi questioni di design che invece sono oggetto di valutazione.
