@@ -33,7 +33,7 @@ L’esame per il corso *95648 - PROGETTAZIONE E SVILUPPO DEL SOFTWARE - 9 cfu* c
     * Se lo si desidera, si può inizializzare il repository generandolo dal seguente template: <https://github.com/unibo-lptsi-pss/pss-javafx> (si raccomanda di ripulirlo dei file non necessari) 
 * Requisiti tecnici del progetto
     * Utilizzo di **git** come strumento di controllo di versione del progetto.
-    * Utilizzo di **GitHub** come hosting. Il nome del repository sarà così formato: “pss22-<nomeprogetto>”
+    * Utilizzo di **GitHub** come hosting. Il **nome del repository** sarà così formato: `pss23-24-[Nomeprogetto]-[Cognome1]-[Cognome2]-...`
     * Utilizzo di **Gradle** come build system del progetto.
 * Elementi raccomandati per un buon progetto:
     * Buona modellazione del dominio mediante interfacce e classi
